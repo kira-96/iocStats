@@ -200,6 +200,7 @@ static void statsWSAllocBytes(double *);
 static void statsWSTotalBytes(double *);
 static void statsCpuUsage(double *);
 static void statsCpuUtilization(double *);
+static void statsScannerCpuUtilization(double *);
 static void statsNoOfCpus(double *);
 static void statsSuspendedTasks(double *);
 static void statsFdUsage(double *);
@@ -251,6 +252,7 @@ static validGetParms statsGetParms[] = {
     {"workspace_total_bytes", statsWSTotalBytes, MEMORY_TYPE},
     {"sys_cpuload", statsCpuUsage, LOAD_TYPE},
     {"ioc_cpuload", statsCpuUtilization, LOAD_TYPE},
+    {"scanner_cpuload", statsScannerCpuUtilization, LOAD_TYPE},
     {"cpu", statsCpuUtilization, LOAD_TYPE},
     {"no_of_cpus", statsNoOfCpus, LOAD_TYPE},
     {"suspended_tasks", statsSuspendedTasks, LOAD_TYPE},
@@ -302,6 +304,7 @@ static int queueDataInitialized;
 static scanInfo scan[TOTAL_TYPES] = {{0}};
 static fdInfo fdusage = {0, 0};
 static loadInfo loadinfo = {1, 0., 0.};
+static double scannerLoad = 0.;
 static int susptasknumber = 0;
 static int recordnumber = 0;
 static clustInfo clustinfo[2] = {{{0}}, {{0}}};
@@ -374,12 +377,15 @@ static void scan_time(int type) {
   case LOAD_TYPE: {
     loadInfo loadinfo_local = {1, 0., 0.};
     int susptasknumber_local = 0;
+    double scannerload_local = 0.;
     devIocStatsGetCpuUsage(&loadinfo_local);
     devIocStatsGetCpuUtilization(&loadinfo_local);
+    devScannerStatsGetCpuUtilization(&scannerload_local);
     devIocStatsGetSuspTasks(&susptasknumber_local);
     epicsMutexLock(scan_mutex);
     loadinfo = loadinfo_local;
     susptasknumber = susptasknumber_local;
+    scannerLoad = scannerload_local;
     epicsMutexUnlock(scan_mutex);
     break;
   }
@@ -451,6 +457,7 @@ static long ai_init(int pass) {
   scan_mutex = epicsMutexMustCreate();
   devIocStatsInitCpuUsage();
   devIocStatsInitCpuUtilization(&loadinfo);
+  devScannerStatsInitCpuUtilization();
   devIocStatsInitFDUsage();
   devIocStatsInitMemUsage();
   devIocStatsInitWorkspaceUsage();
@@ -683,6 +690,7 @@ static void statsWSTotalBytes(double *val) {
 }
 static void statsCpuUsage(double *val) { *val = loadinfo.cpuLoad; }
 static void statsCpuUtilization(double *val) { *val = loadinfo.iocLoad; }
+static void statsScannerCpuUtilization(double *val) { *val = scannerLoad; }
 static void statsNoOfCpus(double *val) { *val = (double)loadinfo.noOfCpus; }
 static void statsSuspendedTasks(double *val) { *val = (double)susptasknumber; }
 static void statsFdUsage(double *val) { *val = (double)fdusage.used; }

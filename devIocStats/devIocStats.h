@@ -89,6 +89,10 @@ extern int devIocStatsGetCpuUsage(loadInfo *pval);
 extern int devIocStatsInitCpuUtilization(loadInfo *pval);
 extern int devIocStatsGetCpuUtilization(loadInfo *pval);
 
+/* Scanner Load */
+extern int devScannerStatsInitCpuUtilization(void);
+extern int devScannerStatsGetCpuUtilization(double *pval);
+
 /* FD Usage */
 extern int devIocStatsInitFDUsage(void);
 extern int devIocStatsGetFDUsage(fdInfo *pval);

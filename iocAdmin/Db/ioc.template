@@ -164,6 +164,24 @@ record(ai, "$(IOCNAME):IOC_CPU_LOAD") {
     info(autosaveFields_pass0, "HOPR LOPR HIHI HIGH LOW LOLO HHSV HSV LSV LLSV")
 }
 
+record(ai, "$(IOCNAME):SCANNER_CPU_LOAD") {
+    field(DESC, "SCANNER CPU Load")
+    field(SCAN, "I/O Intr")
+    field(DTYP, "IOC stats")
+    field(INP,  "@scanner_cpuload")
+    field(EGU,  "%")
+    field(PREC, "1")
+    field(HOPR, "100")
+    field(LOLO, "0")
+    field(HIHI, "80")
+    field(HIGH, "70")
+    field(HHSV, "MAJOR")
+    field(HSV,  "MINOR")
+    field(LLSV, "MAJOR")
+
+    info(autosaveFields_pass0, "HOPR LOPR HIHI HIGH LOW LOLO HHSV HSV LSV LLSV")
+}
+
 record(ai, "$(IOCNAME):CPU_CNT") {
     field(DESC, "Number of CPUs")
     field(DTYP, "IOC stats")
