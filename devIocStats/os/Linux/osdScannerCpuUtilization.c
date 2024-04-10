@@ -4,7 +4,7 @@
 * in file LICENSE that is included with this distribution.
 \*************************************************************************/
 
-/* osdScannerCpuUsage.c - CPU utilization info: linux implementation = read
+/* osdScannerCpuUtilization.c - CPU utilization info: linux implementation = read
  * /proc/pid/stat */
 
 /*

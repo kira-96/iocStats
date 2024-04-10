@@ -352,6 +352,20 @@ record(waveform, "$(IOCNAME):APP_DIR") {
     field(PINI, "YES")
 }
 
+record(stringin, "$(IOCNAME):ETHERCAT_LOADED") {
+    field(DESC, "EtherCAT Driver Loaded")
+    field(DTYP, "IOC stats")
+    field(INP,  "@ethercat_loaded")
+    field(PINI, "YES")
+}
+
+record(stringin, "$(IOCNAME):ETHERCAT_VERSION") {
+    field(DESC, "EtherCAT Driver Version")
+    field(DTYP, "IOC stats")
+    field(INP,  "@ethercat_version")
+    field(PINI, "YES")
+}
+
 record(stringin, "$(IOCNAME):UPTIME") {
     field(DESC, "Elapsed Time since Start")
     field(SCAN, "1 second")

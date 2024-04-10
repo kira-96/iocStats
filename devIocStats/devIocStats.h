@@ -136,4 +136,9 @@ extern int devIocStatsGetHostname(char **pval);
 extern int devIocStatsGetPID(double *proc_id);
 extern int devIocStatsGetPPID(double *proc_id);
 
+/* EtherCAT Driver Info */
+extern int devIocStatsInitEtherCatInfo(void);
+extern int devIocStatsGetEtherCatLoaded(char **pval);
+extern int devIocStatsGetEtherCatVersion(char **pval);
+
 #endif /* devIocStats_H */

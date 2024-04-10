@@ -4,7 +4,7 @@
 * in file LICENSE that is included with this distribution.
 \*************************************************************************/
 
-/* osdScannerCpuUtilization.c - CPU utilization info: default implementation = do nothing */
+/* osdEtherCatInfo.c - EtherCAT info: default implementation = do nothing */
 
 /*
  *  Author: Yang Zhenghan
@@ -15,10 +15,18 @@
 
 #include <devIocStats.h>
 
-int devScannerStatsInitCpuUtilization() {
+static char *notavail = "<not available>";
+
+int devIocStatsInitEtherCatInfo() {
   return 0;
 }
 
-int devScannerStatsGetCpuUtilization(double *pval) {
+int devIocStatsGetEtherCatLoaded(char **pval) {
+  *pval = notavail;
+  return -1;
+}
+
+int devIocStatsGetEtherCatVersion(char **pval) {
+  *pval = notavail;
   return -1;
 }

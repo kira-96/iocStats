@@ -161,6 +161,9 @@ static void statsUpTime(char *);
 static void statsHostName(char *);
 static void statsPwd1(char *);
 static void statsPwd2(char *);
+/* EtherCAT driver info */
+static void statsEtherCatLoaded(char *);
+static void statsEtherCatVersion(char *);
 
 static int devIocStatsGetEngineer(char **pval);
 static int devIocStatsGetLocation(char **pval);
@@ -183,6 +186,8 @@ static validGetStrParms statsGetStrParms[] = {
     {"hostname", statsHostName, STATIC_TYPE},
     {"pwd1", statsPwd1, STATIC_TYPE},
     {"pwd2", statsPwd2, STATIC_TYPE},
+    {"ethercat_loaded", statsEtherCatLoaded, STATIC_TYPE},
+    {"ethercat_version", statsEtherCatVersion, STATIC_TYPE},
     {NULL, NULL, 0}};
 
 sStats devStringinStats = {
@@ -211,6 +216,7 @@ static long stringin_init(int pass) {
   devIocStatsInitBootInfo();
   devIocStatsInitSystemInfo();
   devIocStatsInitHostInfo();
+  devIocStatsInitEtherCatInfo();
 
   return 0;
 }
@@ -383,6 +389,16 @@ static void statsKernelVer(char *d) {
 static void statsPwd1(char *d) { getStringPart(d, 0, devIocStatsGetPwd); }
 static void statsPwd2(char *d) {
   getStringPart(d, MAX_NAME_SIZE, devIocStatsGetPwd);
+}
+
+/* EtherCAT driver loaded */
+static void statsEtherCatLoaded(char *d) {
+  getStringPart(d, 0, devIocStatsGetEtherCatLoaded);
+}
+
+/* EtherCAT driver version info */
+static void statsEtherCatVersion(char *d) {
+  getStringPart(d, 0, devIocStatsGetEtherCatVersion);
 }
 
 static void statsHostName(char *d) {
