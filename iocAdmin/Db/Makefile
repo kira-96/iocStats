@@ -20,6 +20,7 @@ DB += iocVxWorksOnly.db
 DB += iocRTEMSOnly.db
 DB += iocEnvVar.db
 DB += iocCluster.db
+DB += iocSearchMon.db
 DB += iocScanMon.db
 DB += iocScanMonSum.db
 DB += iocGeneralTime.db
@@ -40,7 +41,7 @@ include $(TOP)/configure/RULES
 
 $(COMMON_DIR)/iocAdminRTEMS.db:   $(COMMON_DIR)/iocAdminScanMon.db $(COMMON_DIR)/epicsEnvVars.db $(COMMON_DIR)/siteEnvVars.db
 
-$(COMMON_DIR)/iocAdminSoft.db:    $(COMMON_DIR)/iocAdminScanMon.db $(COMMON_DIR)/epicsEnvVars.db $(COMMON_DIR)/siteEnvVars.db
+$(COMMON_DIR)/iocAdminSoft.db:    $(COMMON_DIR)/iocAdminScanMon.db $(COMMON_DIR)/epicsEnvVars.db $(COMMON_DIR)/siteEnvVars.db $(COMMON_DIR)/iocSearchMon.db
 
 $(COMMON_DIR)/iocAdminVxWorks.db: $(COMMON_DIR)/iocAdminScanMon.db $(COMMON_DIR)/epicsEnvVars.db $(COMMON_DIR)/siteEnvVars.db
 

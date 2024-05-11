@@ -1,0 +1,16 @@
+record(stringin, "$(IOCNAME):CA_SERVER_PORT") {
+    field(DESC, "EPICS_CA_SERVER_PORT")
+    field(DTYP, "IOC epics var")
+    field(INP,  "@EPICS_CA_SERVER_PORT")
+    field(PINI, "YES")
+    field(FLNK, "$(IOCNAME):SEARCH_MONITOR")
+}
+
+record(aSub, "$(IOCNAME):SEARCH_MONITOR") {
+    field(DESC, "$(IOCNAME) search monitor service")
+    field(INAM, "searchMonInit")
+    field(SNAM, "searchMon")
+    field(BRSV, "INVALID")
+    field(INPA, "$(IOCNAME):CA_SERVER_PORT")
+    field(FTA,  "STRING")
+}

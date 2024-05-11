@@ -25,6 +25,7 @@ SRCS += devIocStatsAnalog.c
 SRCS += devIocStatsString.c
 SRCS += devIocStatsWaveform.c
 SRCS += devIocStatsSub.c
+SRCS += devIocStatsAsub.c
 SRCS += devIocStatsTest.c
 
 # OSD parts
